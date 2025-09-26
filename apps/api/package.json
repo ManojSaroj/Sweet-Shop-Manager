@@ -2,12 +2,12 @@
   "name": "@sweet-shop/api",
   "version": "1.0.0",
   "description": "Sweet Shop API - NestJS backend",
-  "main": "dist/main.js",
+  "main": "dist/src/main.js",
   "type": "module",
   "scripts": {
     "dev": "nest start --watch",
-    "build": "prisma generate && nest build",
-    "start": "node dist/main.js",
+    "build": "prisma generate --schema=./prisma/schema.prisma && nest build",
+    "start": "node dist/src/main.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:e2e": "jest --config ./test/jest-e2e.json",
@@ -17,7 +17,7 @@
     "prisma:reset": "prisma migrate reset --force",
     "prisma:seed": "node prisma/seed.js",
     "seed": "pnpm prisma:generate && pnpm prisma:migrate && pnpm prisma:seed",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate --schema=./prisma/schema.prisma"
   },
   "dependencies": {
     "@nestjs/common": "^10.2.10",

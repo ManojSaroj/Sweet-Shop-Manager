@@ -3,7 +3,8 @@ services:
     name: sweet-shop-api
     env: node
     plan: free
-    buildCommand: pnpm install && pnpm --filter shared build && pnpm prisma generate && pnpm build
+    rootDir: apps/api
+    buildCommand: pnpm install && pnpm --filter shared build && pnpm prisma generate --schema=./prisma/schema.prisma && pnpm build
     startCommand: pnpm start
     envVars:
       - key: NODE_ENV
