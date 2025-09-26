@@ -15,7 +15,11 @@ async function bootstrap() {
 
   // CORS configuration
   const allowedOrigins = process.env.NODE_ENV === 'production' 
-    ? [process.env.FRONTEND_URL || 'https://sweet-shop-web.vercel.app']
+    ? [
+        'https://sweet-shop-web.vercel.app',
+        'https://sweet-shop-web-git-main.vercel.app',
+        'https://sweet-shop-web-git-main-your-username.vercel.app'
+      ]
     : true; // Allow all origins in development
     
   app.enableCors({
