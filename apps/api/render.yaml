@@ -4,7 +4,7 @@ services:
     env: node
     plan: free
     rootDir: apps/api
-    buildCommand: pnpm install --no-frozen-lockfile && pnpm --filter shared build && pnpm prisma generate --schema=./prisma/schema.prisma && pnpm build
+    buildCommand: pnpm install --no-frozen-lockfile && pnpm --filter shared build && pnpm prisma generate --schema=./prisma/schema.prisma && pnpm build && pnpm migrate:deploy && pnpm prisma seed --schema=./prisma/schema.prisma
     startCommand: pnpm start
     envVars:
       - key: NODE_ENV
