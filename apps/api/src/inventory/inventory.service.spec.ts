@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { NotFoundException, BadRequestException } from '@nestjs/common';
-import { InventoryService } from './inventory.service';
-import { PrismaService } from '../prisma/prisma.service';
+import { InventoryService } from './inventory.service.js';
+import { PrismaService } from '../prisma/prisma.service.js';
 
 describe('InventoryService', () => {
   let service;

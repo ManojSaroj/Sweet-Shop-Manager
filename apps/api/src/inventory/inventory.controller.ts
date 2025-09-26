@@ -1,8 +1,8 @@
 import { Controller, Post, Body, Param, Inject, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
-import { InventoryService } from './inventory.service';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { AdminGuard } from '../auth/guards/admin.guard';
+import { InventoryService } from './inventory.service.js';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { AdminGuard } from '../auth/guards/admin.guard.js';
 
 @ApiTags('inventory')
 @Controller('sweets/:id')

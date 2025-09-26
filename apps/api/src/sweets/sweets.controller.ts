@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, Query, Inject, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
-import { SweetsService } from './sweets.service';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { AdminGuard } from '../auth/guards/admin.guard';
+import { SweetsService } from './sweets.service.js';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { AdminGuard } from '../auth/guards/admin.guard.js';
 
 @ApiTags('sweets')
 @Controller('sweets')

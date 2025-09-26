@@ -1,6 +1,6 @@
 import { Injectable, ConflictException, UnauthorizedException, Inject } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service.js';
 import { createHash, randomBytes, scrypt } from 'crypto';
 import { promisify } from 'util';
 
