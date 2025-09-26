@@ -14,8 +14,12 @@ async function bootstrap() {
   }));
 
   // CORS configuration
+  const allowedOrigins = process.env.NODE_ENV === 'production' 
+    ? [process.env.FRONTEND_URL || 'https://sweet-shop-web.vercel.app']
+    : true; // Allow all origins in development
+    
   app.enableCors({
-    origin: true, // Allow all origins in development
+    origin: allowedOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
