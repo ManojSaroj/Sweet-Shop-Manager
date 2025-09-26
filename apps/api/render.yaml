@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: sweet-shop-api
+    env: node
+    plan: free
+    buildCommand: pnpm install && pnpm --filter shared build && pnpm build
+    startCommand: pnpm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sweet-shop-db
+          property: connectionString
+      - key: JWT_ACCESS_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: PORT
+        value: 10000
+
+databases:
+  - name: sweet-shop-db
+    databaseName: sweetshop
+    user: sweetshop_user
+    plan: free

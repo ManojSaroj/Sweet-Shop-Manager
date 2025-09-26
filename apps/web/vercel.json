@@ -1,0 +1,9 @@
+{
+  "buildCommand": "pnpm install && pnpm --filter shared build && pnpm build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "installCommand": "pnpm install",
+  "env": {
+    "VITE_API_URL": "@vite_api_url"
+  }
+}
