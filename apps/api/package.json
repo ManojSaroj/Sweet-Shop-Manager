@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nest start --watch",
-    "build": "nest build",
+    "build": "prisma generate && nest build",
     "start": "node dist/main.js",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -16,7 +16,8 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:reset": "prisma migrate reset --force",
     "prisma:seed": "node prisma/seed.js",
-    "seed": "pnpm prisma:generate && pnpm prisma:migrate && pnpm prisma:seed"
+    "seed": "pnpm prisma:generate && pnpm prisma:migrate && pnpm prisma:seed",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@nestjs/common": "^10.2.10",
