@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { PrismaModule } from './prisma/prisma.module.js';
-import { AuthModule } from './auth/auth.module.js';
-import { SweetsModule } from './sweets/sweets.module.js';
-import { InventoryModule } from './inventory/inventory.module.js';
+import { PrismaModule } from './prisma/prisma.module';
+import { AuthModule } from './auth/auth.module';
+import { SweetsModule } from './sweets/sweets.module';
+import { InventoryModule } from './inventory/inventory.module';
 
 @Module({
   imports: [

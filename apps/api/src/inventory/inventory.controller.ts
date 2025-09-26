@@ -1,13 +1,15 @@
 import { Controller, Post, Body, Param, Inject, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
-import { InventoryService } from './inventory.service.js';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
-import { AdminGuard } from '../auth/guards/admin.guard.js';
+import { InventoryService } from './inventory.service';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AdminGuard } from '../auth/guards/admin.guard';
 
 @ApiTags('inventory')
 @Controller('sweets/:id')
 export class InventoryController {
-  constructor(@Inject(InventoryService) inventoryService) {
+  private inventoryService: InventoryService;
+
+  constructor(inventoryService: InventoryService) {
     this.inventoryService = inventoryService;
   }
 
@@ -19,7 +21,7 @@ export class InventoryController {
   @ApiResponse({ status: 400, description: 'Out of stock' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Sweet not found' })
-  async purchase(@Param('id') id, @Body() purchaseDto) {
+  async purchase(@Param('id') id: string, @Body() purchaseDto: any) {
     return this.inventoryService.purchase(id, purchaseDto);
   }
 
@@ -31,7 +33,7 @@ export class InventoryController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Admin access required' })
   @ApiResponse({ status: 404, description: 'Sweet not found' })
-  async restock(@Param('id') id, @Body() restockDto) {
+  async restock(@Param('id') id: string, @Body() restockDto: any) {
     return this.inventoryService.restock(id, restockDto);
   }
 }

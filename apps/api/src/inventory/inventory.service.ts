@@ -1,13 +1,15 @@
 import { Injectable, NotFoundException, BadRequestException, Inject } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service.js';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class InventoryService {
-  constructor(@Inject(PrismaService) prisma) {
+  private prisma: PrismaService;
+
+  constructor(prisma: PrismaService) {
     this.prisma = prisma;
   }
 
-  async purchase(sweetId, purchaseDto) {
+  async purchase(sweetId: string, purchaseDto: any) {
     const { quantity = 1 } = purchaseDto;
 
     const sweet = await this.prisma.sweet.findUnique({
@@ -34,7 +36,7 @@ export class InventoryService {
     });
   }
 
-  async restock(sweetId, restockDto) {
+  async restock(sweetId: string, restockDto: any) {
     const { quantity } = restockDto;
 
     const sweet = await this.prisma.sweet.findUnique({

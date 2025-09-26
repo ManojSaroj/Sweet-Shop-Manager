@@ -1,6 +1,6 @@
 import { Injectable, ConflictException, UnauthorizedException, Inject } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from '../prisma/prisma.service.js';
+import { PrismaService } from '../prisma/prisma.service';
 import { createHash, randomBytes, scrypt } from 'crypto';
 import { promisify } from 'util';
 
@@ -8,12 +8,15 @@ const scryptAsync = promisify(scrypt);
 
 @Injectable()
 export class AuthService {
-  constructor(@Inject(PrismaService) prisma, @Inject(JwtService) jwtService) {
+  private prisma: PrismaService;
+  private jwtService: JwtService;
+
+  constructor(prisma: PrismaService, jwtService: JwtService) {
     this.prisma = prisma;
     this.jwtService = jwtService;
   }
 
-  async register(registerDto) {
+  async register(registerDto: { email: string; password: string }) {
     const { email, password } = registerDto;
 
     // Check if user already exists
@@ -50,7 +53,7 @@ export class AuthService {
     };
   }
 
-  async login(loginDto) {
+  async login(loginDto: { email: string; password: string }) {
     const { email, password } = loginDto;
 
     // Find user
@@ -82,7 +85,7 @@ export class AuthService {
     };
   }
 
-  async generateTokens(userId, email, role) {
+  async generateTokens(userId: string, email: string, role: string) {
     const payload = { sub: userId, email, role };
 
     const [accessToken, refreshToken] = await Promise.all([
@@ -99,15 +102,15 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  async hashPassword(password) {
+  async hashPassword(password: string) {
     const salt = randomBytes(16).toString('hex');
     const hash = await scryptAsync(password, salt, 64);
-    return salt + ':' + hash.toString('hex');
+    return salt + ':' + (hash as Buffer).toString('hex');
   }
 
-  async verifyPassword(password, hashedPassword) {
+  async verifyPassword(password: string, hashedPassword: string) {
     const [salt, hash] = hashedPassword.split(':');
     const hashBuffer = await scryptAsync(password, salt, 64);
-    return hashBuffer.toString('hex') === hash;
+    return (hashBuffer as Buffer).toString('hex') === hash;
   }
 }

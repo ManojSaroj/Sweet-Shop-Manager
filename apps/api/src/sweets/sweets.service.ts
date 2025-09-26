@@ -1,16 +1,18 @@
 import { Injectable, NotFoundException, ConflictException, Inject } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service.js';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class SweetsService {
-  constructor(@Inject(PrismaService) prisma) {
+  private prisma: PrismaService;
+
+  constructor(prisma: PrismaService) {
     this.prisma = prisma;
   }
 
-  async findAll(query) {
+  async findAll(query: any) {
     const { name, category, minPrice, maxPrice } = query;
     
-    const where = {};
+    const where: any = {};
     
     if (name) {
       where.name = { contains: name, mode: 'insensitive' };
@@ -34,7 +36,7 @@ export class SweetsService {
     });
   }
 
-  async create(createSweetDto) {
+  async create(createSweetDto: any) {
     const { name, category, price, quantity } = createSweetDto;
 
     // Check if sweet with same name already exists
@@ -56,7 +58,7 @@ export class SweetsService {
     });
   }
 
-  async update(id, updateSweetDto) {
+  async update(id: string, updateSweetDto: any) {
     const sweet = await this.prisma.sweet.findUnique({
       where: { id },
     });
@@ -86,7 +88,7 @@ export class SweetsService {
     });
   }
 
-  async remove(id) {
+  async remove(id: string) {
     const sweet = await this.prisma.sweet.findUnique({
       where: { id },
     });
