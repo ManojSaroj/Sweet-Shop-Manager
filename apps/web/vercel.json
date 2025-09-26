@@ -1,6 +1,6 @@
 {
-  "buildCommand": "pnpm install && pnpm --filter shared build && pnpm build",
+  "buildCommand": "npm install && npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
-  "installCommand": "pnpm install"
+  "installCommand": "npm install"
 }
