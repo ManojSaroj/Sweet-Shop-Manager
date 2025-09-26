@@ -18,7 +18,8 @@ async function bootstrap() {
     ? [
         'https://sweet-shop-web.vercel.app',
         'https://sweet-shop-web-git-main.vercel.app',
-        'https://sweet-shop-web-git-main-your-username.vercel.app'
+        'https://sweet-shop-web-git-main-your-username.vercel.app',
+        'http://web-plum-beta.vercel.app'
       ]
     : true; // Allow all origins in development
     
